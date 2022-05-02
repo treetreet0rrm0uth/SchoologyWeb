@@ -12,7 +12,7 @@ app.set("view engine", "ejs")
 app.engine('ejs', require('ejs').__express);
 
 router.get("/", (req, res) => {
-    res.render("../views/index")
+    res.render("index")
 })
 
 router.get("/execute/:district/:request", (req, res) => {
