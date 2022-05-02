@@ -4,7 +4,7 @@
   "description": "Access the Schoology API!",
   "main": "index.js",
   "scripts": {
-    "start": "npm server.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "tree tree t0rr m0outh",
