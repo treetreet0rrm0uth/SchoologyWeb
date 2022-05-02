@@ -2,11 +2,14 @@ require("dotenv").config()
 const SchoologyAPI = require("schoologyapi")
 const express = require("express")
 const serverless = require("serverless-http")
+const ejs = require("ejs")
 const app = express()
 const router = express.Router()
 const SchoologyWeb = new SchoologyAPI(process.env.key, process.env.secret)
 
 app.set("view engine", "ejs")
+
+app.engine('ejs', require('ejs').__express);
 
 router.get("/", (req, res) => {
     res.render("index")
