@@ -12,7 +12,18 @@ app.set("view engine", "ejs")
 app.engine('ejs', require('ejs').__express)
 
 router.get("/", (req, res) => {
-    res.render("index")
+    const html = `<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SchoologyWeb</title>
+    </head>
+    <body>
+        <h1>SchoologyWeb</h1>
+    </body>
+</html>`
+    res.send(html)
 })
 
 router.get("/execute/:district/:request", (req, res) => {
