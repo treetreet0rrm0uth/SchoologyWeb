@@ -5,8 +5,10 @@ const serverless = require("serverless-http")
 const ejs = require("ejs")
 const app = express()
 const router = express.Router()
+const path = require("path")
 const SchoologyWeb = new SchoologyAPI(process.env.key, process.env.secret)
 
+app.set('views', path.join(__dirname, 'views'))
 app.set("view engine", "ejs")
 
 app.engine('ejs', require('ejs').__express)
@@ -16,11 +18,11 @@ router.get("/", (req, res) => {
 })
 
 router.get("/execute/:district/:request", (req, res) => {
+    console.log(req.ip)
     async function main() {
         const token = await SchoologyWeb.createRequestToken()
         res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?${token}?oauth_callback=https://schoologyweb.netlify.app/view`)
     }
-    console.log(req.ip)
     main()
 })
 
