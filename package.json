@@ -1,0 +1,29 @@
+{
+  "name": "schoologyweb",
+  "version": "1.0.0",
+  "description": "Access the Schoology API!",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm server.js"
+  },
+  "keywords": [],
+  "author": "tree tree t0rr m0outh",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.7",
+    "express": "^4.18.1",
+    "netlify-cli": "^10.1.0",
+    "netlify-lambda": "^2.0.15",
+    "schoologyapi": "^0.0.4",
+    "serverless-http": "^3.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/treetreet0rrm0uth/SchoologyWeb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/treetreet0rrm0uth/SchoologyWeb/issues"
+  },
+  "homepage": "https://github.com/treetreet0rrm0uth/SchoologyWeb#readme"
+}

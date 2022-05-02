@@ -1,2 +1,0 @@
-# SchoologyWeb
- View Schoology posts!
