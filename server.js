@@ -16,12 +16,12 @@ app.get("/execute/:district/:request", (req, res) => {
     console.log(req.ip)
     async function main() {
         const token = await SchoologyWeb.createRequestToken()
-        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?${token}?oauth_callback=https://schoologyweb.netlify.app/view`)
+        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?${token}?oauth_callback=https://schoologyweb.herokuapp.com/view`)
     }
     main()
 })
 
-app.get("/view/:request", (req, res) => {
+app.get("/view", (req, res) => {
     console.log(req)
 })
 
