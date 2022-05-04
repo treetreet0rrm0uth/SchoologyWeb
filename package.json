@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node server.js"
   },
+  "engines": {
+      "node": "14.x"
+  },
   "keywords": [],
   "author": "tree tree t0rr m0outh",
   "license": "ISC",
