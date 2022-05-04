@@ -7,7 +7,7 @@
     "start": "node server.js"
   },
   "engines": {
-      "node": "14.x"
+    "node": "14.x"
   },
   "keywords": [],
   "author": "tree tree t0rr m0outh",
@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/treetreet0rrm0uth/SchoologyWeb/issues"
   },
-  "homepage": "https://github.com/treetreet0rrm0uth/SchoologyWeb#readme"
+  "homepage": "https://github.com/treetreet0rrm0uth/SchoologyWeb#readme",
+  "devDependencies": {
+    "@vercel/node": "^1.15.0"
+  }
 }

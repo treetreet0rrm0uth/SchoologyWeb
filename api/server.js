@@ -9,7 +9,7 @@ app.set("view engine", "ejs")
 app.engine('ejs', require('ejs').__express)
 
 app.get("/", (req, res) => {
-    res.render("./views/index")
+    res.render("index")
 })
 
 app.get("/execute/:district/:request", (req, res) => {
