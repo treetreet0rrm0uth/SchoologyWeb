@@ -8,11 +8,11 @@ app.set("view engine", "ejs")
 
 app.engine('ejs', require('ejs').__express)
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
     res.render("index")
 })
 
-app.get("/api/execute/:district/:request", (req, res) => {
+app.get("/execute/:district/:request", (req, res) => {
     console.log(req.ip)
     async function main() {
         const token = await SchoologyWeb.createRequestToken()
@@ -21,7 +21,7 @@ app.get("/api/execute/:district/:request", (req, res) => {
     main()
 })
 
-app.get("/api/view", (req, res) => {
+app.get("/view", (req, res) => {
     res.send(req)
     res.send(req.ip)
     console.log(req)
