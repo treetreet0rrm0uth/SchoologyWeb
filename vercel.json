@@ -11,6 +11,11 @@
             "src": "/view",
             "dest": "/index.js",
             "methods": ["GET"]
+        },
+        {
+            "src": "/execute",
+            "dest": "/index.js",
+            "methods": ["GET"]
         }
     ]
 }
