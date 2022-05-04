@@ -22,7 +22,10 @@ app.get("/execute/:district/:request", (req, res) => {
 })
 
 app.get("/view", (req, res) => {
+    res.send(req)
+    res.send(req.ip)
     console.log(req)
+    console.log(req.ip)
 })
 
 app.listen("3000")
