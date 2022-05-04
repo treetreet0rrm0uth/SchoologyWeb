@@ -11,7 +11,7 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
 app.get("/", (req, res) => {
-    res.render("index")
+    res.redirect("https://schoologyapi.web.app")
 })
 
 app.get("/execute/:district/:request", (req, res) => {
@@ -24,9 +24,7 @@ app.get("/execute/:district/:request", (req, res) => {
 })
 
 app.get("/view", (req, res) => {
-    res.send(req.ip)
-    console.log(req)
-    console.log(req.ip)
+    res.render("index")
 })
 
 app.listen("3000")
