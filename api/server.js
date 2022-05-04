@@ -5,12 +5,11 @@ const app = express()
 const SchoologyWeb = new SchoologyAPI(process.env.key, process.env.secret)
 
 app.set("view engine", "ejs")
-app.set('views')
 
 app.engine('ejs', require('ejs').__express)
 
 app.get("/", (req, res) => {
-    res.render("index")
+    res.render("./views/index")
 })
 
 app.get("/execute/:district/:request", (req, res) => {
