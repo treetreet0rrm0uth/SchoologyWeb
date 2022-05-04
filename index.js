@@ -24,7 +24,7 @@ app.get("/execute/:district/:request", (req, res) => {
 })
 
 app.get("/view", (req, res) => {
-    res.render("index")
+    console.log(SchoologyWeb.getAccessToken(token))
 })
 
 app.listen("3000")
