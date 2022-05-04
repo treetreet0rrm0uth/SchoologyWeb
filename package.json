@@ -2,9 +2,9 @@
   "name": "schoologyweb",
   "version": "1.0.0",
   "description": "Access the Schoology API!",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "engines": {
       "node": "14.x"
