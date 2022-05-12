@@ -18,16 +18,26 @@ app.get("/", (req, res) => {
 app.get("/execute/:district/:request", (req, res) => {
     console.log(req.ip)
     async function main() {
-        const token = await SchoologyWeb.createRequestToken()
+        token = await SchoologyWeb.createRequestToken()
         res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?${token}?oauth_callback=https://schoologyweb.vercel.app/view`)
     }
     main()
 })
 
 app.get("/view", (req, res) => {
-    async function main() {
-        console.log(await SchoologyWeb.getAccessToken(token))
+    if(token == undefined) {
+        res.send("oh nose! an error in my 1000% perfect code!!! please tell me if this happens, and i will attempt to fix it yay!!! discord: tree tree t0rr m0uth#5165")
+        return
     }
+    async function main() {
+        await SchoologyWeb.getAccessToken(token)
+        const final = SchoologyWeb.parseRequestToken(token)
+        console.log(final.finalKey)
+        console.log(final.finalSecret)
+        const client = new SchoologyAPI(process.env.key, process.env.secret)
+        await client.createRequestToken().then(console.log)
+    }
+    main()
 })
 
 app.listen("3000")
