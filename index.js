@@ -4,6 +4,7 @@ const express = require("express")
 const app = express()
 const path = require("path")
 const SchoologyWeb = new SchoologyAPI(process.env.key, process.env.secret)
+
 let token
 
 app.use(express.static(path.join(__dirname, "public")))
@@ -30,12 +31,22 @@ app.get("/view", (req, res) => {
         return
     }
     async function main() {
-        await SchoologyWeb.getAccessToken(token)
-        const final = SchoologyWeb.parseRequestToken(token)
-        console.log(final.finalKey)
-        console.log(final.finalSecret)
-        const client = new SchoologyAPI(process.env.key, process.env.secret)
-        await client.createRequestToken().then(console.log)
+        const OAuth = await SchoologyWeb.getAccessToken(token)
+        const parsedOAuth = SchoologyWeb.parseRequestToken(OAuth)
+        res.send(await SchoologyWeb.clientRequest("/users/13225459/grades", parsedOAuth.finalKey, parsedOAuth.finalSecret))
+    }
+    main()
+})
+
+app.get("/view2", (req, res) => {
+    if(token == undefined) {
+        res.send("oh nose! an error in my 1000% perfect code!!! please tell me if this happens, and i will attempt to fix it yay!!! discord: tree tree t0rr m0uth#5165")
+        return
+    }
+    async function main() {
+        const OAuth = await SchoologyWeb.getAccessToken(token)
+        const parsedOAuth = SchoologyWeb.parseRequestToken(OAuth)
+        res.send(await SchoologyWeb.clientRequest("/users/89544494/grades", parsedOAuth.finalKey, parsedOAuth.finalSecret))
     }
     main()
 })
