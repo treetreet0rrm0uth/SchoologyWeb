@@ -13,6 +13,11 @@
             "methods": ["GET"]
         },
         {
+            "src": "/view2",
+            "dest": "/index.js",
+            "methods": ["GET"]
+        },
+        {
             "src": "/execute/(.+)/(.+)",
             "dest": "/index.js",
             "methods": ["GET"]
