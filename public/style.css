@@ -1,0 +1,52 @@
+* {
+    font-family: 'Titillium Web', sans-serif;
+    text-align: center;
+}
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.title {
+    font-size: 3em;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #000;
+    color: white;
+}
+
+.data {
+    font-weight: bold;
+    padding-bottom: 50px;
+    text-align: left;
+}
+
+.container {
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+.align-left {
+    float: left;
+    width: 50%;
+    text-decoration: none;
+    color: #000;
+}
+
+.align-right {
+    float: right;
+    width: 50%;
+    text-decoration: none;
+    color: #000;
+}

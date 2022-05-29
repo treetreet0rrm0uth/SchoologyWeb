@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap" rel="stylesheet">
+        <link href="/style.css" rel="stylesheet">
+        <title>SchoologyWeb</title>
+    </head>
+    <body>
+        <h1 class="title">SchoologyWeb</h1>
+        <h1><%= name %> - User Profile Updates</h1>
+        <div class="data">
+            <table border=1 frame=hsides rules=rows>
+                <% for(let i=0; i < requestData.update.length; i++) { %>
+                   <tr>
+                     <td style="text-align: left;"><%= requestData.update[i].body %></td>
+                     <td style="text-align: right;"><%= requestData.update[i].created %></td>
+                   </tr>
+                <% } %>
+            </table>
+            <div class="container">
+                <h2><a href="<%= prevURL %>" class="align-left">Previous Page</a></h2>
+                <h2><a href="<%= nextURL %>" class="align-right">Next Page</a></h2>
+            </div>
+        </div>
+        <div class="footer">
+            <p>SchoologyWeb by tree tree t0rr m0uth | <a href="https://github.com/treetreet0rrm0uth/schoologyweb" target="_blank" style="text-decoration: none; color: #fff;">GitHub</a></p>
+        </div>
+    </body>
+</html>
