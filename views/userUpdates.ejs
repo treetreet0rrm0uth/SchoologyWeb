@@ -16,10 +16,11 @@
         <div class="data">
             <table border=1 frame=hsides rules=rows>
                 <% for(let i=0; i < requestData.update.length; i++) { %>
-                   <tr>
-                     <td style="text-align: left;"><%= requestData.update[i].body %></td>
-                     <td style="text-align: right;"><%= requestData.update[i].created %></td>
-                   </tr>
+                    <% const creationDate = new Date(requestData.update[i].created * 1000).toLocaleDateString("en-US") %>
+                    <tr>
+                        <td style="text-align: left;"><%= requestData.update[i].body %></td>
+                        <td style="text-align: right;"><%= creationDate %></td>
+                    </tr>
                 <% } %>
             </table>
             <div class="container">
