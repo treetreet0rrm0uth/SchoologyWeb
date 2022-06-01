@@ -8,6 +8,7 @@ const SchoologyWeb = new SchoologyAPI(process.env.key, process.env.secret)
 let token
 
 app.use(express.static((__dirname + "/public")))
+app.use("/css", express.static(__dirname + "public/css"))
 app.set("views", path.resolve(__dirname, "views"))
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
