@@ -7,7 +7,7 @@ const SchoologyWeb = new SchoologyAPI(process.env.key, process.env.secret)
 
 let token
 
-app.use(express.static((__dirname, "public")))
+app.use(express.static((__dirname + "/public")))
 app.set("views", path.resolve(__dirname, "views"))
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
@@ -27,13 +27,13 @@ app.get("/execute/:district/:request", (req, res) => {
 app.get("/request/:key/:secret/:realm/:id/*", (req, res) => {
     async function main() {
         const client = new SchoologyAPI(req.params.key, req.params.secret)
-        const requestData = JSON.parse(await client.request(`/${req.params.realm}/${req.params.id}/${req.params[0]}`))
+        const requestData = JSON.parse(await client.request(`/${req.params.realm}/${req.params.id}/${req.params[0]}/`))
         let url = req.protocol + '://' + req.get('host') + req.originalUrl
         if (req.params.realm == "users") {
             if (req.params[0] == "") {
                 res.render("userInfo", { requestData })
             } else {
-                const fetchName = JSON.parse(await client.request("/users/" + req.params.id))
+                const fetchName = JSON.parse(await client.request(`/${req.params.realm}/${req.params.id}/`))
                 const name = fetchName.name_display
                 let nextBoolean = new Boolean(true)
                 let prevBoolean = new Boolean(false)

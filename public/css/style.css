@@ -14,7 +14,12 @@ html {
 }
 
 .title {
+    color: #000;
     font-size: 3em;
+}
+
+a {
+    color: #000;
 }
 
 .footer {
@@ -29,7 +34,6 @@ html {
 .data {
     font-weight: bold;
     padding-bottom: 50px;
-
 }
 
 .container {
