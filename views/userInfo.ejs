@@ -7,10 +7,67 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap" rel="stylesheet">
-        <link href="/css/style.css" rel="stylesheet">
         <title>SchoologyWeb</title>
     </head>
     <body>
+        <style>
+            * {
+    font-family: 'Titillium Web', sans-serif;
+    text-align: center;
+}
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.title {
+    color: #000;
+    font-size: 3em;
+}
+
+a {
+    color: #000;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #000;
+    color: white;
+}
+
+.data {
+    font-weight: bold;
+    padding-bottom: 50px;
+}
+
+.container {
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+.align-left {
+    float: left;
+    width: 50%;
+    text-decoration: none;
+    color: #000;
+}
+
+.align-right {
+    float: right;
+    width: 50%;
+    text-decoration: none;
+    color: #000;
+}
+        </style>
         <h1 class="title"><a href="https://schoologyapi.web.app/" style="text-decoration: none;">SchoologyWeb</a></h1>
         <h1><%= requestData.name_display %> - User Profile</h1>
         <div class="data">
