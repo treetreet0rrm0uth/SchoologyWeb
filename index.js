@@ -72,7 +72,7 @@ app.get("/self/:key/:secret/*", (req, res) => {
         if(req.params[0] == "profile") {
             res.redirect(`https://schoologyweb.vercel.app/request/${req.params.key}/${req.params.secret}/users/${temp.uid}/`)
         }else if(req.params[0] == "updates") {
-            res.redirect(`https://schoologyweb.vercel.app/request/${req.params.key}/${req.params.secret}/users/${temp.uid}/updates&start=0&limit=200/`)
+            res.redirect(`https://schoologyweb.vercel.app/request/${req.params.key}/${req.params.secret}/users/${temp.uid}/updates&start=0&limit=200`)
         }
     }
     main()
