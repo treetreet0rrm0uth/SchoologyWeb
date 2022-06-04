@@ -65,6 +65,19 @@ app.get("/request/:key/:secret/:realm/:id/*", (req, res) => {
     main()
 })
 
+app.get("/self/:key/:secret/*", (req, res) => {
+    async function main() {
+        const client = new SchoologyAPI(req.params.key, req.params.secret)
+        const temp = JSON.parse(await client.request("/users/me"))
+        if(req.params[0] == "profile") {
+            res.redirect(`https://schoologyweb.vercel.app/request/${req.params.key}/${req.params.secret}/users/${temp.uid}/`)
+        }else if(req.params[0] == "updates") {
+            res.redirect(`https://schoologyweb.vercel.app/request/${req.params.key}/${req.params.secret}/users/${temp.uid}/updates&start=0&limit=200/`)
+        }
+    }
+    main()
+})
+
 app.get("/view", (req, res) => {
     if (token == undefined) {
         res.send("oh nose! an error in my 1000% perfect code!!! please tell me if this happens, and i will attempt to fix it yay!!! discord: tree tree t0rr m0uth#5165")

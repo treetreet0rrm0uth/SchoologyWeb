@@ -1,82 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap" rel="stylesheet">
-        <title>SchoologyWeb</title>
-    </head>
-    <body>
-        <style>
-            * {
-    font-family: 'Titillium Web', sans-serif;
-    text-align: center;
-}
 
-html {
-    overflow: scroll;
-    overflow-x: hidden;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap" rel="stylesheet">
+    <title>SchoologyWeb</title>
+</head>
 
-::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-}
+<body>
+    <!--sorry for the shitty fix, i couldnt get the css to work in vercel any other way ):-->
+    <style>
+        * {
+            font-family: 'Titillium Web', sans-serif;
+            text-align: center;
+        }
 
-.title {
-    color: #000;
-    font-size: 3em;
-}
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
 
-a {
-    color: #000;
-}
+        ::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
 
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #000;
-    color: white;
-}
+        .title {
+            color: #000;
+            font-size: 3em;
+        }
 
-.data {
-    font-weight: bold;
-    padding-bottom: 50px;
-}
+        a {
+            color: #000;
+        }
 
-.container {
-    width: 100%;
-    padding-bottom: 50px;
-}
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #000;
+            color: white;
+        }
 
-.align-left {
-    float: left;
-    width: 50%;
-    text-decoration: none;
-    color: #000;
-}
+        .data {
+            font-weight: bold;
+            padding-bottom: 50px;
+        }
 
-.align-right {
-    float: right;
-    width: 50%;
-    text-decoration: none;
-    color: #000;
-}
-        </style>
-        <h1 class="title"><a href="https://schoologyapi.web.app/" style="text-decoration: none;">SchoologyWeb</a></h1>
-        <h1><%= requestData.name_display %> - User Profile</h1>
-        <div class="data">
-            <img src = <%= requestData.picture_url %>></img>
-            <h2>Schoology ID: <%= requestData.id %></h2>
-            <h2>School Email: <%= requestData.primary_email %></h2>
-        </div>
-        <div class="footer">
-            <p>SchoologyWeb by tree tree t0rr m0uth | <a href="https://github.com/treetreet0rrm0uth/schoologyweb" target="_blank" style="text-decoration: none; color: #fff;">GitHub</a></p>
-        </div>
-    </body>
+        .container {
+            width: 100%;
+            padding-bottom: 50px;
+        }
+
+        .align-left {
+            float: left;
+            width: 50%;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .align-right {
+            float: right;
+            width: 50%;
+            text-decoration: none;
+            color: #000;
+        }
+    </style>
+    <h1 class="title"><a href="https://schoologyapi.web.app/" style="text-decoration: none;">SchoologyWeb</a></h1>
+    <h1>
+        <%= requestData.name_display %> - User Profile
+    </h1>
+    <div class="data">
+        <img src=<%=requestData.picture_url %>></img>
+        <h2>Schoology ID: <%= requestData.id %>
+        </h2>
+        <h2>School Email: <%= requestData.primary_email %>
+        </h2>
+    </div>
+    <div class="footer">
+        <p>SchoologyWeb by tree tree t0rr m0uth | <a href="https://github.com/treetreet0rrm0uth/schoologyweb"
+                target="_blank" style="text-decoration: none; color: #fff;">GitHub</a></p>
+    </div>
+</body>
+
 </html>
