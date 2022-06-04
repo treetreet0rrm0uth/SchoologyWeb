@@ -21,6 +21,11 @@
             "src": "/execute/(.+)/(.+)/(.+)",
             "dest": "/index.js",
             "methods": ["GET"]
+        },
+        {
+            "src": "/self/(.+)/(.+)/(.+)",
+            "dest": "/index.js",
+            "methods": ["GET"]
         }
     ]
 }
