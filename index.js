@@ -16,10 +16,19 @@ app.get("/", (req, res) => {
     res.redirect("https://schoologyapi.web.app")
 })
 
-app.get("/execute/:district/:request", (req, res) => {
+app.get("/execute/:district/", (req, res) => {
     async function main() {
         token = await SchoologyWeb.createRequestToken()
-        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?${token}?oauth_callback=https://schoologyweb.vercel.app/view`)
+        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?oauth_token=${SchoologyWeb.parseRequestToken(token).finalKey}&oauth_callback=schoologyweb.vercel.app/auth`)
+    }
+    main()
+})
+
+app.get("/auth", (req, res) => {
+    async function main() {
+        const final = await SchoologyWeb.getAccessToken(token)
+        const response = await SchoologyWeb.clientRequest("/users/13225459", final)
+        res.send(response)
     }
     main()
 })
@@ -74,32 +83,6 @@ app.get("/self/:key/:secret/*", (req, res) => {
         }else if(req.params[0] == "updates") {
             res.redirect(`https://schoologyweb.vercel.app/request/${req.params.key}/${req.params.secret}/users/${temp.uid}/updates&start=0&limit=200`)
         }
-    }
-    main()
-})
-
-app.get("/view", (req, res) => {
-    if (token == undefined) {
-        res.send("oh nose! an error in my 1000% perfect code!!! please tell me if this happens, and i will attempt to fix it yay!!! discord: tree tree t0rr m0uth#5165")
-        return
-    }
-    async function main() {
-        const OAuth = await SchoologyWeb.getAccessToken(token)
-        const parsedOAuth = SchoologyWeb.parseRequestToken(OAuth)
-        res.send(await SchoologyWeb.clientRequest("/users/13225459/grades", parsedOAuth.finalKey, parsedOAuth.finalSecret))
-    }
-    main()
-})
-
-app.get("/view2", (req, res) => {
-    if (token == undefined) {
-        res.send("oh nose! an error in my 1000% perfect code!!! please tell me if this happens, and i will attempt to fix it yay!!! discord: tree tree t0rr m0uth#5165")
-        return
-    }
-    async function main() {
-        const OAuth = await SchoologyWeb.getAccessToken(token)
-        const parsedOAuth = SchoologyWeb.parseRequestToken(OAuth)
-        res.send(await SchoologyWeb.clientRequest("/users/89544494/grades", parsedOAuth.finalKey, parsedOAuth.finalSecret))
     }
     main()
 })
