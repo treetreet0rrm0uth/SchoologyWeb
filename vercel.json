@@ -13,7 +13,7 @@
             "methods": ["GET"]
         },
         {
-            "src": "/execute/(.+)/(.+)",
+            "src": "/execute/(.+)",
             "dest": "/index.js",
             "methods": ["GET"]
         },
