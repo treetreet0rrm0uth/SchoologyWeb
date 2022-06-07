@@ -27,7 +27,7 @@ app.get("/execute/:district/", (req, res) => {
 app.get("/auth", (req, res) => {
     async function main() {
         const final = await SchoologyWeb.getAccessToken(token)
-        const response = await SchoologyWeb.clientRequest("/users/13225459", final)
+        const response = await SchoologyWeb.clientRequest("/messages/inbox", final)
         res.send(response)
     }
     main()
