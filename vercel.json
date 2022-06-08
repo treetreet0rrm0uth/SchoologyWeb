@@ -8,7 +8,35 @@
     ],
     "routes": [
         {
-            "src": "/(.+)",
+            "src": "/request/(.+)/(.+)/(.+)/(.+)",
+            "dest": "/index.js",
+            "methods": [
+                "GET"
+            ]
+        },
+        {
+            "src": "/execute/(.+)",
+            "dest": "/index.js",
+            "methods": [
+                "GET"
+            ]
+        },
+        {
+            "src": "/auth",
+            "dest": "/index.js",
+            "methods": [
+                "GET"
+            ]
+        },
+        {
+            "src": "/self/(.+)/(.+)/(.+)",
+            "dest": "/index.js",
+            "methods": [
+                "GET"
+            ]
+        },
+        {
+            "src": "/url",
             "dest": "/index.js",
             "methods": [
                 "GET"
