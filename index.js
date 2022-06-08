@@ -16,10 +16,10 @@ app.get("/", (req, res) => {
     res.redirect("https://schoologyapi.web.app")
 })
 
-app.get("/execute/:district/", (req, res) => {
+app.get("/execute/:district", (req, res) => {
     async function main() {
         token = await SchoologyWeb.createRequestToken()
-        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?oauth_token=${SchoologyWeb.parseRequestToken(token).finalKey}&oauth_callback=schoologyweb.vercel.app/auth`)
+        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?oauth_token=${SchoologyWeb.parseRequestToken(token).finalKey}&oauth_callback=schoologyweb.vercel.app/auth?request=${req.query.request}`)
     }
     main()
 })
@@ -27,15 +27,31 @@ app.get("/execute/:district/", (req, res) => {
 app.get("/auth", (req, res) => {
     async function main() {
         if (token == undefined) {
-            res.send("Oh no! You've taken too long to finish the OAuth flow. Thanks to this shitty free server hosting, you only have 10 seconds to do so. I'm not that sorry, but maybe solve the ReCaptcha faster next time. If this error persists, feel free to contact me :)")
+            res.send("Error")
         } else {
             const final = await SchoologyWeb.getAccessToken(token)
-            const response = await SchoologyWeb.clientRequest("/messages/inbox", final)
-            res.send(response)
+            const response = await SchoologyWeb.clientRequest(req.query.request + "&start=0&limit=200", final)
+            try {
+                const requestData = JSON.parse(response)
+                if (requestData.update) {
+                    const uid = requestData.update[0].uid
+                    const user = JSON.parse(await SchoologyWeb.request(`/users/${uid}`))
+                    const name = user.name_display
+                    const nextURL = 0
+                    const prevURL = 0
+                    res.render("userUpdates", { requestData, name, nextURL, prevURL })
+                } else if (requestData.primary_email) {
+                    res.render("userInfo", { requestData })
+                }
+            } catch (err) {
+                res.send("Error")
+            }
         }
     }
     main()
 })
+
+app.get("/view/")
 
 app.get("/request/:key/:secret/:realm/:id/*", (req, res) => {
     async function main() {
@@ -48,8 +64,6 @@ app.get("/request/:key/:secret/:realm/:id/*", (req, res) => {
             } else {
                 const fetchName = JSON.parse(await client.request(`/${req.params.realm}/${req.params.id}/`))
                 const name = fetchName.name_display
-                let nextBoolean = new Boolean(true)
-                let prevBoolean = new Boolean(false)
                 let next = requestData.links.next
                 let prev = requestData.links.prev
                 let nextURL
