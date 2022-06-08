@@ -87,4 +87,4 @@ app.get("/self/:key/:secret/*", (req, res) => {
     main()
 })
 
-app.listen("3000")
+app.listen("80")
