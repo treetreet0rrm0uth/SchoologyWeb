@@ -26,6 +26,9 @@ app.get("/execute/:district/", (req, res) => {
 
 app.get("/auth", (req, res) => {
     async function main() {
+        if(token == undefined) {
+            res.send("Oh no! You've taken too long to finish the OAuth flow. Thanks to this shitty free server hosting, you only have 10 seconds to do so. I'm not that sorry, but maybe solve the ReCaptcha faster next time. If this error persists, feel free to contact me :)")
+        }
         const final = await SchoologyWeb.getAccessToken(token)
         const response = await SchoologyWeb.clientRequest("/messages/inbox", final)
         res.send(response)
