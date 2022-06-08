@@ -34,7 +34,7 @@ app.get("/auth", (req, res) => {
         } else {
             final = await SchoologyWeb.getAccessToken(token)
             const response = await SchoologyWeb.clientRequest(`${req.query.request}&start=0&limit=200`, final)
-
+            try {
                 const requestData = JSON.parse(response)
                 if (requestData.update) {
                     const uid = requestData.update[0].uid
@@ -46,7 +46,9 @@ app.get("/auth", (req, res) => {
                 } else if (requestData.primary_email) {
                     res.render("userInfo", { requestData })
                 }
-
+            } catch {
+                res.send("Oh nose, an error has occurred! If this issue persists, please open an issue in the GitHub!")
+            }
         }
     }
     main()
