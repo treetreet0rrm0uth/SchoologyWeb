@@ -7,6 +7,7 @@ const SchoologyWeb = new SchoologyAPI(process.env.key, process.env.secret)
 
 let token
 let district
+let final
 
 app.use(express.static(__dirname + '/public'))
 app.set("views", path.resolve(__dirname, "views"))
@@ -21,7 +22,7 @@ app.get("/execute/:district", (req, res) => {
     async function main() {
         district = req.params.district
         token = await SchoologyWeb.createRequestToken()
-        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?oauth_token=${SchoologyWeb.parseRequestToken(token).finalKey}&oauth_callback=schoologyweb.vercel.app/auth?request=${req.query.request}&start=${req.query.start}`)
+        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?oauth_token=${SchoologyWeb.parseRequestToken(token).finalKey}&oauth_callback=schoologyweb.vercel.app/auth?request=${req.query.request}&page=${req.query.page}`)
     }
     main()
 })
@@ -31,35 +32,32 @@ app.get("/auth", (req, res) => {
         if (token == undefined) {
             res.send("Oh no, an error! This was probably caused by the serverless function timing out, or the OAuth flow being incomplete. If this issue persists, feel free to create an issue on the GitHub.")
         } else {
-            const final = await SchoologyWeb.getAccessToken(token)
-            let request = req.query.request
-            if (req.query.start == 0) {
-                request = `${request}&start=0&limit=200`
-            } else if (req.query.start == 200) {
-                request = `${request}&start=200&limit=200`
+            final = await SchoologyWeb.getAccessToken(token)
+            let response
+            if(req.query.page == 0) {
+                response = await SchoologyWeb.clientRequest(`${req.query.request}&start=0&limit=200`, final)
+            }else if(req.query.page == 1) {
+                response = await SchoologyWeb.clientRequest(`${req.query.request}&start=200&limit=200`, final)
+            }else {
+                response = await SchoologyWeb.clientRequest(`${req.query.request}&start=0&limit=200`, final)
             }
-            const response = await SchoologyWeb.clientRequest(request, final)
-            try {
+
                 const requestData = JSON.parse(response)
                 if (requestData.update) {
                     const uid = requestData.update[0].uid
                     const user = JSON.parse(await SchoologyWeb.request(`/users/${uid}`))
                     const name = user.name_display
-                    const nextURL = `https://schoologyweb.vercel.app/execute/${district}?request=/users/${uid}/updates&start=200`
-                    const prevURL = `https://schoologyweb.vercel.app/execute/${district}?request=/users/${uid}/updates&start=0`
+                    const nextURL = `https://schoologyweb.vercel.app/execute/${district}?request=/users/${uid}/updates&page=1`
+                    const prevURL = `https://schoologyweb.vercel.app/execute/${district}?request=/users/${uid}/updates&page=0`
                     res.render("userUpdates", { requestData, name, nextURL, prevURL })
                 } else if (requestData.primary_email) {
                     res.render("userInfo", { requestData })
                 }
-            } catch {
-                res.send("Oh nose, an error has occurred! If this issue persists, please open an issue in the GitHub!")
-            }
+
         }
     }
     main()
 })
-
-app.get("/view/")
 
 app.get("/request/:key/:secret/:realm/:id/*", (req, res) => {
     async function main() {
