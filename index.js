@@ -26,12 +26,13 @@ app.get("/execute/:district/", (req, res) => {
 
 app.get("/auth", (req, res) => {
     async function main() {
-        if(token == undefined) {
+        if (token == undefined) {
             res.send("Oh no! You've taken too long to finish the OAuth flow. Thanks to this shitty free server hosting, you only have 10 seconds to do so. I'm not that sorry, but maybe solve the ReCaptcha faster next time. If this error persists, feel free to contact me :)")
+        } else {
+            const final = await SchoologyWeb.getAccessToken(token)
+            const response = await SchoologyWeb.clientRequest("/messages/inbox", final)
+            res.send(response)
         }
-        const final = await SchoologyWeb.getAccessToken(token)
-        const response = await SchoologyWeb.clientRequest("/messages/inbox", final)
-        res.send(response)
     }
     main()
 })
@@ -81,9 +82,9 @@ app.get("/self/:key/:secret/*", (req, res) => {
     async function main() {
         const client = new SchoologyAPI(req.params.key, req.params.secret)
         const temp = JSON.parse(await client.request("/users/me"))
-        if(req.params[0] == "profile") {
+        if (req.params[0] == "profile") {
             res.redirect(`https://schoologyweb.vercel.app/request/${req.params.key}/${req.params.secret}/users/${temp.uid}/`)
-        }else if(req.params[0] == "updates") {
+        } else if (req.params[0] == "updates") {
             res.redirect(`https://schoologyweb.vercel.app/request/${req.params.key}/${req.params.secret}/users/${temp.uid}/updates&start=0&limit=200`)
         }
     }
