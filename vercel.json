@@ -8,28 +8,7 @@
     ],
     "routes": [
         {
-            "src": "/request/(.+)/(.+)/(.+)/(.+)",
-            "dest": "/index.js",
-            "methods": [
-                "GET"
-            ]
-        },
-        {
-            "src": "/execute/(.+)",
-            "dest": "/index.js",
-            "methods": [
-                "GET"
-            ]
-        },
-        {
-            "src": "/auth",
-            "dest": "/index.js",
-            "methods": [
-                "GET"
-            ]
-        },
-        {
-            "src": "/self/(.+)/(.+)/(.+)",
+            "src": "/(.+)",
             "dest": "/index.js",
             "methods": [
                 "GET"
