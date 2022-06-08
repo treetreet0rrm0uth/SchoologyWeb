@@ -41,6 +41,20 @@
             "methods": [
                 "GET"
             ]
+        },
+        {
+            "src": "/test",
+            "dest": "/index.js",
+            "methods": [
+                "GET"
+            ]
+        },
+        {
+            "src": "/view",
+            "dest": "/index.js",
+            "methods": [
+                "GET"
+            ]
         }
     ]
 }

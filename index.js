@@ -58,6 +58,22 @@ app.get("/url", (req, res) => {
     res.send("Unfortunately I didn't finish page switching if you sign in with Schoology OAuth. You can switch pages if you sign in with your API credentials.")
 })
 
+app.get("/test", (req, res) => {
+    async function main() {
+        token = await SchoologyWeb.createRequestToken()
+        res.redirect(`https://pausd.schoology.com/oauth/authorize?oauth_token=${SchoologyWeb.parseRequestToken(token).finalKey}&oauth_callback=schoologyweb.vercel.app/view?request=${req.query.request}`)
+    }
+    main()
+})
+
+app.get("/view", (req, res) => {
+    async function main() {
+        final = await SchoologyWeb.getAccessToken(token)
+        res.send(await SchoologyWeb.clientRequest(req.query.request, final))
+    }
+    main()
+})
+
 app.get("/request/:key/:secret/:realm/:id/*", (req, res) => {
     async function main() {
         const client = new SchoologyAPI(req.params.key, req.params.secret)
