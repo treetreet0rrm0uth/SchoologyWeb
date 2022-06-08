@@ -6,6 +6,7 @@ const path = require("path")
 const SchoologyWeb = new SchoologyAPI(process.env.key, process.env.secret)
 
 let token
+let district
 
 app.use(express.static(__dirname + '/public'))
 app.set("views", path.resolve(__dirname, "views"))
@@ -18,8 +19,9 @@ app.get("/", (req, res) => {
 
 app.get("/execute/:district", (req, res) => {
     async function main() {
+        district = req.params.district
         token = await SchoologyWeb.createRequestToken()
-        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?oauth_token=${SchoologyWeb.parseRequestToken(token).finalKey}&oauth_callback=schoologyweb.vercel.app/auth?request=${req.query.request}`)
+        res.redirect(`https://${req.params.district}.schoology.com/oauth/authorize?oauth_token=${SchoologyWeb.parseRequestToken(token).finalKey}&oauth_callback=schoologyweb.vercel.app/auth?request=${req.query.request}&start=${req.query.start}`)
     }
     main()
 })
@@ -27,24 +29,30 @@ app.get("/execute/:district", (req, res) => {
 app.get("/auth", (req, res) => {
     async function main() {
         if (token == undefined) {
-            res.send("Error")
+            res.send("Oh no, an error! This was probably caused by the serverless function timing out, or the OAuth flow being incomplete. If this issue persists, feel free to create an issue on the GitHub.")
         } else {
             const final = await SchoologyWeb.getAccessToken(token)
-            const response = await SchoologyWeb.clientRequest(req.query.request + "&start=0&limit=200", final)
+            let request = req.query.request
+            if (req.query.start == 0) {
+                request = `${request}&start=0&limit=200`
+            } else if (req.query.start == 200) {
+                request = `${request}&start=200&limit=200`
+            }
+            const response = await SchoologyWeb.clientRequest(request, final)
             try {
                 const requestData = JSON.parse(response)
                 if (requestData.update) {
                     const uid = requestData.update[0].uid
                     const user = JSON.parse(await SchoologyWeb.request(`/users/${uid}`))
                     const name = user.name_display
-                    const nextURL = 0
-                    const prevURL = 0
+                    const nextURL = `https://schoologyweb.vercel.app/execute/${district}?request=/users/${uid}/updates&start=200`
+                    const prevURL = `https://schoologyweb.vercel.app/execute/${district}?request=/users/${uid}/updates&start=0`
                     res.render("userUpdates", { requestData, name, nextURL, prevURL })
                 } else if (requestData.primary_email) {
                     res.render("userInfo", { requestData })
                 }
-            } catch (err) {
-                res.send("Error")
+            } catch {
+                res.send("Oh nose, an error has occurred! If this issue persists, please open an issue in the GitHub!")
             }
         }
     }
