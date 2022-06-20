@@ -109,3 +109,13 @@ app.get("/self/:key/:secret/*", async (req, res) => {
 })
 
 app.listen("80")
+
+//gotta make the file longer for github to recognize this as a javascript repo, not an ejs one
+
+//hi :)
+
+//i spent too much time on this, please use it and share to your friends and such
+
+//do it now ):<
+
+//tree tree t0rr m0uth
