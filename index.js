@@ -118,4 +118,8 @@ app.listen("80")
 
 //do it now ):<
 
+//hahah once again am i editing this!!! im way too stupid to get ejs css to work on vercel
+
+//it even works locally, just not on vercel )))):
+
 //tree tree t0rr m0uth
