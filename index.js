@@ -83,10 +83,12 @@ app.get("/request/:key/:secret/:realm/:id/*", async (req, res) => {
             }
             if (next != undefined) {
                 next = next.slice(-19)
+                nextBoolean = true
                 nextURL = url + next
             }
             if (prev != undefined) {
                 prev = prev.slice(-17)
+                prevBoolean = true
                 prevURL = url + prev
             }
             res.render("userUpdates", { requestData, name, nextURL, prevURL })
@@ -108,7 +110,7 @@ app.get("/self/:key/:secret/*", async (req, res) => {
 
 app.listen("80")
 
-//gotta make the file longer for github to recognize this as a typescript repo, not an ejs one
+//gotta make the file longer for github to recognize this as a javascript repo, not an ejs one
 
 //hi :)
 
