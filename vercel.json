@@ -2,56 +2,56 @@
     "version": 2,
     "builds": [
         {
-            "src": "index.ts",
+            "src": "index.js",
             "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "/request/(.+)/(.+)/(.+)/(.+)",
-            "dest": "/index.ts",
+            "dest": "/index.js",
             "methods": [
                 "GET"
             ]
         },
         {
             "src": "/execute/(.+)",
-            "dest": "/index.ts",
+            "dest": "/index.js",
             "methods": [
                 "GET"
             ]
         },
         {
             "src": "/auth",
-            "dest": "/index.ts",
+            "dest": "/index.js",
             "methods": [
                 "GET"
             ]
         },
         {
             "src": "/self/(.+)/(.+)/(.+)",
-            "dest": "/index.ts",
+            "dest": "/index.js",
             "methods": [
                 "GET"
             ]
         },
         {
             "src": "/url",
-            "dest": "/index.ts",
+            "dest": "/index.js",
             "methods": [
                 "GET"
             ]
         },
         {
             "src": "/test",
-            "dest": "/index.ts",
+            "dest": "/index.js",
             "methods": [
                 "GET"
             ]
         },
         {
             "src": "/view",
-            "dest": "/index.ts",
+            "dest": "/index.js",
             "methods": [
                 "GET"
             ]
