@@ -122,4 +122,10 @@ app.listen("80")
 
 //it even works locally, just not on vercel )))):
 
+//nooo i shortened the functions and now i am back here, writing more useless garbage!!!
+
+//github has a built-in editor now :O it's amazing
+
+//dsafjkl;fjdksl;afjlkd;sajfkl;dsaj
+
 //tree tree t0rr m0uth
